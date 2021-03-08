@@ -1,0 +1,15 @@
+@using SampleECommerce.Shared
+
+@inject ItemDataState itemState;
+
+<style>
+    .global_search {
+       color: white !important;
+    }
+</style>
+
+<MatTextField @bind-Value="@itemState.SearchString" InputClass="global_search" Icon="search" FullWidth="true" Outlined="true">
+</MatTextField>
+@code
+{
+}

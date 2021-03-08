@@ -1,0 +1,52 @@
+﻿@page "/cart"
+@using SampleECommerce.Shared
+@inject CartState cart;
+
+<h1>Cart</h1>
+
+<p>Cart Items</p>
+
+@if (cart.CartCount == 0)
+{
+    <p><em>No Items in Cart.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Item</th>
+                <th>Snapshot</th>
+                <th>Count</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cart.CartItems)
+            {
+                <tr>
+                    <td>@item.Key.Category</td>
+                    <td>@item.Key.ImageTitle</td>
+                    <td><img height="50" width="50" src="@item.Key.ImageUrl" /></td>
+                    <td>@item.Value</td>
+                    <td>
+                        @{
+                            var tempItem = item.Key;
+                        }
+                        <MatIconButton Icon="delete" OnClick="@(() => removeFromCart(tempItem))"></MatIconButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="display:flex;flex-direction:row-reverse;">
+        <MatButton Raised="true" Style="margin-right:10px;">Check Out</MatButton>
+    </div>
+}
+
+@code {
+    void removeFromCart(ItemData item){
+        cart.RemoveFromCart(item);
+    }
+}
