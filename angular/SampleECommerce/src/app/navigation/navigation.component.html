@@ -1,0 +1,12 @@
+<mat-toolbar color="accent">
+    <button mat-button routerLink="/">Sample eCommerce App.</button>
+    <ng-container *ngIf="page != 'cart'">
+        <app-global-search fxFlex></app-global-search>
+        <mat-chip-list>
+            <mat-chip (click)="navigateToCart()" style="cursor: pointer;">
+                {{cartCount$ | async}}
+                <mat-icon>shopping_cart</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </ng-container>
+</mat-toolbar>
