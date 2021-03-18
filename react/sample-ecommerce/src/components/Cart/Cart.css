@@ -1,0 +1,9 @@
+.table{
+    width: 85vw;
+}
+.align-right{
+    display:flex;flex-direction:row-reverse;
+}
+.margin-right-10{
+    margin-right:10px;
+}
