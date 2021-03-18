@@ -1,0 +1,82 @@
+﻿@page "/"
+
+@using SampleECommerce.Shared
+@implements IDisposable
+@inject HttpClient Http
+
+@inject CartState cart;
+@inject ItemDataState itemState;
+
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
+@if (isLoading)
+{
+    <p><em>Loading...</em></p>
+}
+else if(itemState.Items.Count > 0)
+{
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            @foreach (var item in itemState.Items)
+            {
+                <div class="mat-layout-grid-cell">
+                    <MatCard class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="@item.ImageUrl">
+                                <div class="demo-mat-card-content" style="color: white;">
+                                    <MatHeadline6 class="demo-mat-card-clean-margin">
+                                        @item.ImageTitle
+                                    </MatHeadline6>
+                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                        @item.Category
+                                    </MatSubtitle2>
+                                </div>
+                            </MatCardMedia>
+                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                @item.ImageDescription
+                            </MatBody2>
+                        </MatCardContent>
+                        <MatCardActions>
+                            <MatCardActionIcons>
+                                @{
+                                    var tempItem = item;
+                                }
+                                <MatIconButton Icon="add_shopping_cart" OnClick="@(() => addToCart(tempItem))"></MatIconButton>
+                            </MatCardActionIcons>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+            }
+        </div>
+    </div>
+}
+else{
+    <p><em>No Items or Search returns empty items.</em></p>
+}
+@code {
+    
+    bool isLoading = false;
+    protected override async Task OnInitializedAsync()
+    {
+        var loadedItems = await sessionStorage.GetItemAsync<ItemData[]>("itemData");
+        if (loadedItems == null)
+        {
+            isLoading = true;
+            loadedItems = await Http.GetFromJsonAsync<ItemData[]>("ItemData");
+            await sessionStorage.SetItemAsync("itemData", loadedItems);
+            isLoading = false;
+        }
+        itemState.LoadItems(loadedItems);
+        itemState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        itemState.OnChange -= StateHasChanged;
+    }
+
+    void addToCart(ItemData item)
+    {
+        cart.AddToCart(item);
+    }
+}

@@ -1,0 +1,71 @@
+@inherits LayoutComponentBase
+@using SampleECommerce.Shared
+@implements IDisposable
+
+@inject CartState cart
+@inject NavigationManager NavManager
+
+
+<MatThemeProvider Theme="@globalTheme">
+    <MatAppBarContainer>
+        <MatAppBar Fixed="true">
+            <MatAppBarRow>
+                <MatAppBarSection>
+                    <MatAppBarTitle>
+                        <MatNavMenu>
+                            <MatNavItem Href="/">Sample eCommerce App.</MatNavItem>
+                        </MatNavMenu>
+                    </MatAppBarTitle>
+                </MatAppBarSection>
+                @if (!isOnCartPage)
+                {
+                    <MatAppBarSection>
+                        <GlobalSearch></GlobalSearch>
+                    </MatAppBarSection>
+                    <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                        <MatChipSet>
+                            <MatChip Label="@cart.CartCount.ToString()" TrailingIcon="shopping_cart"
+                                TrailingIconClick="@(() => navigateToCart())"></MatChip>
+                        </MatChipSet>
+                    </MatAppBarSection>
+                }
+            </MatAppBarRow>
+        </MatAppBar>
+
+        <MatAppBarContent>
+            @Body
+        </MatAppBarContent>
+    </MatAppBarContainer>
+</MatThemeProvider>
+@code
+{
+    bool isOnCartPage = false;
+
+    MatTheme globalTheme = new MatTheme()
+    {
+        Primary = "green",
+        Secondary = "orange"
+    };
+
+    protected override void OnInitialized()
+    {
+        cart.OnChange += StateHasChanged;
+        NavManager.LocationChanged += HandleLocationChanged;
+    }
+
+    public void Dispose()
+    {
+        cart.OnChange -= StateHasChanged;
+        NavManager.LocationChanged -= HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        isOnCartPage = e.Location.EndsWith("cart");
+    }
+
+    void navigateToCart()
+    {
+        NavManager.NavigateTo("/cart");
+    }
+}
