@@ -1,0 +1,12 @@
+.Navigation {
+    display: flex;
+}
+.flexGrow{
+    flex-grow: 100;
+}
+.clickable{
+    cursor: pointer !important;
+}
+.white-color{
+    color: white;
+}
