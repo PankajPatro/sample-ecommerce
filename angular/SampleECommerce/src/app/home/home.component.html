@@ -1,0 +1,24 @@
+<div style="margin-left: 10px; margin-right: 10px;" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="space-between">
+    <ng-container *ngIf="items$ | async as items; else empty">
+        <ng-container *ngIf="items && items.length > 0; else empty">
+            <mat-card class="item-card" *ngFor="let itemData of items trackBy: trackByFn" fxFlex="30">
+                <mat-card-header>
+                    <mat-card-title>{{itemData.imageTitle}}</mat-card-title>
+                    <mat-card-subtitle>{{itemData.category}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image [src]="itemData.imageUrl">
+                <mat-card-content>
+                    <p>
+                        {{itemData.imageDescription}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-icon-button color="accent">
+                        <mat-icon (click)="addToCart(itemData);">add_shopping_cart</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </ng-container>
+    <ng-template #empty>No Items or Search returns empty items.</ng-template>
+</div>

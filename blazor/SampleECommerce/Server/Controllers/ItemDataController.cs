@@ -32,10 +32,10 @@ namespace SampleECommerce.Server.Controllers
             "charles-deluvio-sWiqbPItyg8-unsplash.jpg", "clark-street-mercantile-P3pI6xzovu0-unsplash.jpg", "marcus-loke-xXJ6utyoSw0-unsplash.jpg", "markus-winkler-PQmXUxmfR44-unsplash.jpg", "parker-burchfield-tvG4WvjgsEY-unsplash.jpg", "stil-D4jRahaUaIc-unsplash.jpg"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ItemDataController> _logger;
         private int _dataLength;
 
-        public ItemDataController(ILogger<WeatherForecastController> logger)
+        public ItemDataController(ILogger<ItemDataController> logger)
         {
             _logger = logger;
             _dataLength = new Random(10).Next(15,35);
