@@ -1,10 +1,10 @@
-import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
+import { HomeOutlined } from '@material-ui/icons';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import CartNavigation from '../CartNavigation/CartNavigation';
 import GlobalSearch from '../GlobalSearch/GlobalSearch';
 import './Navigation.css';
-import { useLocation } from 'react-router-dom'
 
 const Navigation: React.FC = () => {
   const location = useLocation();
@@ -13,12 +13,17 @@ const Navigation: React.FC = () => {
     <div className="Navigation">
       <AppBar position="static">
         <Toolbar color="primary">
-          <Button className="white-color" component={Link} to="/">
-            <Typography variant="h6" noWrap>
-              Sample eCommerce
-          </Typography>
-          </Button>
-            {location.pathname !== '/cart' && <>
+          <span>Sample eCommerce</span>
+          {location.pathname === '/cart' &&
+            <>
+              <div className="flexGrow">
+              </div>
+              <Button className="white-color" component={Link} to="/">
+                <HomeOutlined />
+              </Button>
+            </>
+          }
+          {location.pathname !== '/cart' && <>
             <div className="flexGrow">
               <GlobalSearch></GlobalSearch>
             </div>

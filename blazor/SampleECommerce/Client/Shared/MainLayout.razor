@@ -12,11 +12,19 @@
             <MatAppBarRow>
                 <MatAppBarSection>
                     <MatAppBarTitle>
-                        <MatNavMenu>
-                            <MatNavItem Href="/">Sample eCommerce App.</MatNavItem>
-                        </MatNavMenu>
+                        <span>Sample eCommerce App.</span>
                     </MatAppBarTitle>
                 </MatAppBarSection>
+                @if (isOnCartPage)
+                {
+                    <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                        <MatNavMenu>
+                            <MatNavItem Href="/">
+                                <MatIcon Icon="home"></MatIcon>
+                            </MatNavItem>
+                        </MatNavMenu>
+                    </MatAppBarSection>
+                }
                 @if (!isOnCartPage)
                 {
                     <MatAppBarSection>
