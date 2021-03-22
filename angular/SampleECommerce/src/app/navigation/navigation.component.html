@@ -1,5 +1,12 @@
 <mat-toolbar color="accent">
-    <button mat-button routerLink="/">Sample eCommerce App.</button>
+    <span>Sample eCommerce App.</span>
+    <ng-container *ngIf="page === 'cart'">
+        <span fxFlex></span>
+        <button mat-button routerLink="/">
+            <mat-icon>home</mat-icon>
+        </button>
+    </ng-container>
+
     <ng-container *ngIf="page != 'cart'">
         <app-global-search fxFlex></app-global-search>
         <mat-chip-list>
