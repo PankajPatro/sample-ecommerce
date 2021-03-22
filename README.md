@@ -59,7 +59,12 @@ To keep the UI consistent, I had the option of choosing either Bootstrap or Mate
 | UI | MatBlazor | Angular Material | Material UI |
 | Unit Testing | BUnit | Jasmine | Jest |
 | Codebase | [https://github.com/PankajPatro/sample-ecommerce/tree/main/blazor/SampleECommerce](https://github.com/PankajPatro/sample-ecommerce/tree/main/blazor/SampleECommerce) | [https://github.com/PankajPatro/sample-ecommerce/tree/main/angular/SampleECommerce](https://github.com/PankajPatro/sample-ecommerce/tree/main/angular/SampleECommerce) | [https://github.com/PankajPatro/sample-ecommerce/tree/main/react/sample-ecommerce](https://github.com/PankajPatro/sample-ecommerce/tree/main/react/sample-ecommerce) |
-| Explanation |
+| Conclusion | Blazor really looks promising and has a potential of being a production ready application, however I guess the open community support for it needs a bit more attention for having more components available for the business consumers. | Angular no doubt was my preferred choice simply because coming from the world of two way binding it seems so at home experience. The community support is also great and Angular being a more opinionated library would help small organisations lacking an architect to bring in the discipline of choosing the right packages for building enterprise solutions. | React is a different beast altogether, the community support and the change of paradigm shift makes this library a best bet in delivering modern day Single Page application, however it being so open ended needs an architect to flesh out the architecture, choosing libraries and defining the pattern before the developers start writing their code as chances are people with no great knowledge on the tech stack can end up building a spaghetti code. |
+
+Explannation
+
+_Blazor_
+
 - Razor is the page bootstrapped.
 - Razor decides the page layout.
 - The AppBar has 3 components
@@ -68,21 +73,24 @@ To keep the UI consistent, I had the option of choosing either Bootstrap or Mate
   - A Cart Button showing the cart count and on click takes to the Cart
 - The Index.Razor on load calls the service &quot;ItemData&quot;and on receiving the data stores them in session storage
 - The Cart.Razor shows the items in the cart.
-- ItemDataState &amp; CartState are the two way binding which binds the UI and the Index, Global Search, Cart
- |
-- component.html is the page bootstrapped.
+- ItemDataState &amp; CartState are the two way binding which binds the UI and the Index, Global Search, Cart 
+
+_Angular_
+
+- app.component.html is the page bootstrapped.  
 - The navigation is responsible for helping the user to filter the data on the home page and navigate from cart page to home page.
 - The home is responsible to load the items
 - The cart component is responsible for showing the items in the cart.
-- There are two services which are responsible for all the actions in the app. When home page loads it calls the data to be loaded to store. The current application uses akita([https://github.com/datorama/akita](https://github.com/datorama/akita)) as its state management choice. All the data is queried through this store.
- |
-- tsx is the page that is bootstrapped.
-- tsx is responsible for helping the user to filter the data on the home page and help in navigation.
+- There are two services which are responsible for all the actions in the app. When home page loads it calls the data to be loaded to store. The current application uses akita([https://github.com/datorama/akita](https://github.com/datorama/akita)) as its state management choice. All the data is queried through this store. 
+
+_React_
+
+- app.tsx is the page that is bootstrapped.
+- navigation.tsx is responsible for helping the user to filter the data on the home page and help in navigation.
 - The Home.tsx page is responsible to load the items.
 - The Cart.tsx page is responsible to show the items in the cart.
-- The application uses react-redux state management to manage the data. When home page loads(mounts) it dispatches the load method. On data loaded the filter method is dispatched with blank filter which then loads the items to the page.
- |
-| Conclusion | Blazor really looks promising and has a potential of being a production ready application, however I guess the open community support for it needs a bit more attention for having more components available for the business consumers. | Angular no doubt was my preferred choice simply because coming from the world of two way binding it seems so at home experience. The community support is also great and Angular being a more opinionated library would help small organisations lacking an architect to bring in the discipline of choosing the right packages for building enterprise solutions. | React is a different beast altogether, the community support and the change of paradigm shift makes this library a best bet in delivering modern day Single Page application, however it being so open ended needs an architect to flesh out the architecture, choosing libraries and defining the pattern before the developers start writing their code as chances are people with no great knowledge on the tech stack can end up building a spaghetti code. |
+- The application uses react-redux state management to manage the data. When home page loads(mounts) it dispatches the load method. On data loaded the filter method is dispatched with blank filter which then loads the items to the page. 
+
 
 **Other Frameworks Worth Considering**
 
